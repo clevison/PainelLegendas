@@ -1,0 +1,83 @@
+body {
+	height: 100%;
+	background-image: url("../images/mosaico1.jpg");
+	background-size: cover;
+	text-align: center;
+}
+
+#main {
+	padding-top: 100px;
+	height: 100%;
+}
+
+.modal-dialog {
+	height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-header {
+	background-color: #5cc590;
+}
+
+.modal-body {
+	text-align: center;
+}
+
+.modal-content {
+	font-family: 'Open Sans', sans-serif;
+}
+
+.myInput {
+	padding: 5px;
+	width: 100%;
+}
+
+.portfolio {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+.team {
+  font-family: Arial;
+  display: flex;
+  flex-direction: column;
+  width: 148px;
+  height: 198px;
+  background: #fff;
+  border: 1px solid #000;
+  border-radius: 4px;
+  margin: 25px;
+}
+.team .title {
+  font-weight: 500;
+  cursor: default;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.team .title h1 {
+  font-size: 14px;
+  margin: 0;
+  color: #666;
+  text-transform: uppercase;
+}
+.team .image {
+  width: 148px;
+  height: 148px;
+}
+.team .button {
+  background: #666;
+  color: #eee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-size: 11px;
+  height: 24px;
+  text-transform: uppercase;
+  cursor: pointer;
+}
