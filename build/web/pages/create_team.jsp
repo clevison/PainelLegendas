@@ -21,30 +21,44 @@
 
 <body class="home" id="container">
 
-	 <%
+        <%
             String title = request.getParameter("message");
             if(title == null){
-                title = "Erro";
+                title = "Criar Equipe";
             }
             String subTitle = request.getParameter("cause");
             if(subTitle == null){
-                subTitle = "Um erro Inesperado ocorreu :(";
+                subTitle = "";
             }
-        %>	
+        %>
 	<!-- Fixed navbar -->
 	<jsp:include page="fixed_navbar.jsp"/>
 	<!-- /.navbar -->
 
-        <!-- Header -->
-	<header id="head">
-		<div class="container">
-			<div class="row">
-				<h1 class="lead"><%= title %></h1>
-				<p class="tagline"><%= subTitle %></p>
-			</div>
-		</div>
-	</header>
-	<!-- /Header -->
+	<!--create team -->
+        <header id="head">
+            <div class="container">
+                <div class="modal-content">
+                        <div class="modal-header">
+                                <h4 class="modal-title"><%= title %></h4>
+                                <p><%= subTitle %></p>
+                        </div>
+                        <div class="modal-body">
+                                <form method="POST" action="../create_team">
+                                        <p><input type="text" class="myInput" placeholder="Nome da equipe"></p>
+                                        <p><textarea class="myInput" placeholder="Mensagem" maxlength="300" rows="5"></textarea></p>
+                                        <input id="uploadFile"  placeholder="Selecione uma imagem..." disabled="disabled" />
+                                             <div class="fileUpload btn btn-primary">
+                                                <span>Upload</span>
+                                                <input id="uploadBtn" type="file" class="upload myInput" />
+                                            </div>
+                                        <p><input type="submit" class="btn btn-success" value="Enviar"></p>
+                                </form>
+                        </div>
+                </div>
+            </div>
+        </header>
+	<!-- /create team -->
 
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>

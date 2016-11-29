@@ -21,26 +21,7 @@
 
 <body class="home" id="container">
 
-	<!-- Modal to create team -->
-	<div class="modal fade" id="createTeamModal" role="dialog" tabindex="-1">
-		<div class="modal-dialog modal-sm">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title">Criar equipe</h4>
-				</div>
-				<div class="modal-body">
-					<form>
-						<p><input type="text" class="myInput" placeholder="Nome da equipe"></p>
-						<p><textarea class="myInput" placeholder="Mensagem" rows="5"></textarea></p>
-						<br />
-						<p><input type="submit" class="btn btn-success" value="Enviar"></p>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- /Modal to create team -->
+	
 
 	<!-- Modal to edit profile -->
 	<div class="modal fade" id="editProfileModal" role="dialog" tabindex="-1">
@@ -85,30 +66,7 @@
 	<!-- /Modal to request entry -->
 
 	<!-- Fixed navbar -->
-	<div class="navbar navbar-inverse navbar-fixed-top" >
-		<div class="container">
-			<div class="navbar-header">
-				<!-- Button for smallest screens -->
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-				<a class="navbar-brand" href="${pageContext.request.contextPath}/index.jsp"><img src="${pageContext.request.contextPath}/resources/images/logo.png" alt="Progressus HTML5 template"></a>
-			</div>
-			<div class="navbar-collapse collapse">
-				<ul class="nav navbar-nav pull-right">
-                                        <li class="active"><a href="${pageContext.request.contextPath}/index.jsp">Página inicial</a></li>
-                                        <li class="active"><a href="${pageContext.request.contextPath}/main.jsp">Equipes cadastradas</a></li>
-                                        <li class="active"><a href="${pageContext.request.contextPath}/about.jsp">Sobre o site</a></li>
-					<li><a class="btn" data-toggle="modal" data-target="#createTeamModal">CRIAR EQUIPE</a></li>
-					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Olá, {nickname}<b class="caret"></b></a>
-						<ul class="dropdown-menu">
-							<li><a href="#" data-toggle="modal" data-target="#editProfileModal">Editar perfil</a></li>
-							<li><a href="logout.jsp">Sair</a></li>
-						</ul>
-					</li>
-				</ul>
-			</div>
-		</div>
-	</div> 
+	<jsp:include page="fixed_navbar.jsp"/>
 	<!-- /.navbar -->
 
 	<!-- Main -->

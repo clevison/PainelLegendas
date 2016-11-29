@@ -32,7 +32,7 @@
             }
         %>
 	<!-- Fixed navbar -->
-	<jsp:include page="fixed-navbar.jsp"/>
+	<jsp:include page="fixed_navbar.jsp"/>
 	<!-- /.navbar -->
 
 	<!-- Header -->
@@ -40,7 +40,6 @@
 		<div class="container">
 			<div class="modal-content">
 				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
 					<h4 class="modal-title"><%= title %></h4>
                                         <p><%= subTitle %></p>
 				</div>

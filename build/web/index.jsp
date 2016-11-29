@@ -22,7 +22,7 @@
 <body class="home" id="container">
 
 	<!-- Fixed navbar -->
-	<jsp:include page="pages/fixed-navbar.jsp"/>
+	<jsp:include page="/pages/fixed_navbar.jsp"/>
 	<!-- /.navbar -->
 
 	<!-- Header -->
@@ -31,7 +31,7 @@
 			<div class="row">
 				<h1 class="lead">SIMPLES, PRÁTICO E CONFIÁVEL</h1>
 				<p class="tagline">Cadastre-se e tenha acesso às maiores equipes de tradução do país. <br />
-				Junte-se a elas e venha aprender inglês, português e vários outros idiomas, além de fazer novas amizades e, claro, ajudar as pessoas.</p>
+				Junte-se a elas e venha aprender inglês, português e vários outros idiomas, além de fazer novas amizades e claro, ajudar as pessoas.</p>
 				<p>
 					<a class="btn btn-action btn-lg" href="${pageContext.request.contextPath}/pages/login.jsp">ENTRAR</a>
 					&nbsp;&nbsp;&nbsp;

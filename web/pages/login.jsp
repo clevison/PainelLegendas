@@ -33,7 +33,7 @@
 	%>
 	
 	<!-- Fixed navbar -->
-	<jsp:include page="fixed-navbar.jsp"/>
+	<jsp:include page="fixed_navbar.jsp"/>
 	<!-- /.navbar -->
 
 	<!-- Header -->
