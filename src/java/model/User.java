@@ -16,7 +16,7 @@ public class User {
         public void setPermission(int permission) {
             this.permission = permission;
         }	
-	public int getId_Usuario() {
+	public int getId_User() {
 		return id_User;
 	} 
 	public String getNickname() {

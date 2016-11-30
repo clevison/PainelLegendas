@@ -52,7 +52,7 @@ public class UserDAO implements ILogin{
 	        try {
 	            stmt = connection.connectionMySQL().createStatement();
 	            String exe = "UPDATE usuario SET Email = '" + usuario.getEmail() + "'"
-	                    + " WHERE id_usu = '" + usuario.getId_Usuario() +"'";
+	                    + " WHERE id_usu = '" + usuario.getId_User() +"'";
 	            stmt.executeUpdate(exe);
 	            return 1;
 	        } catch (SQLException e) {
@@ -65,7 +65,7 @@ public class UserDAO implements ILogin{
 	        try {
 	            stmt = connection.connectionMySQL().createStatement();
 	            String exe = "UPDATE usuario SET senha = '" + usuario.getPassword() + "'"
-	                    + " WHERE id_usu = '" + usuario.getId_Usuario() +"'";
+	                    + " WHERE id_usu = '" + usuario.getId_User() +"'";
 	            stmt.executeUpdate(exe);
 	            return 1;
 	        } catch (SQLException e) {
@@ -78,7 +78,7 @@ public class UserDAO implements ILogin{
 	        try {
 	            stmt = connection.connectionMySQL().createStatement();
 	            String exe = "UPDATE usuario SET nick = '" + usuario.getNickname() + "'"
-	                    + " WHERE id_usu = '" + usuario.getId_Usuario() +"'";
+	                    + " WHERE id_usu = '" + usuario.getId_User() +"'";
             stmt.executeUpdate(exe);
 	            return 1;
 	        } catch (SQLException e) {
