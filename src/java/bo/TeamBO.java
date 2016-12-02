@@ -7,9 +7,22 @@
 package bo;
 
 import dao.TeamDAO;
+import java.io.File;
 import java.sql.SQLException;
+import java.util.List;
+import javax.imageio.ImageIO;
+import static javax.imageio.ImageIO.getCacheDirectory;
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import static javax.swing.text.DefaultStyledDocument.ElementSpec.ContentType;
 import model.Team;
 import model.User;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileItemFactory;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.commons.io.FilenameUtils;
 
 /**
  *
@@ -47,11 +60,40 @@ public class TeamBO{
          }       
     }; 
     public boolean validatePhoto(String photo){
-        try{
-            return true;
-        } catch (Exception ex) {
-             System.out.println(ex.getMessage());
-             return false;
-        }       
+         return "png".equals(FilenameUtils.getExtension(photo)) || "jpg".equals(FilenameUtils.getExtension(photo).toLowerCase());
     }; 
+    public String uploadImage(HttpServletRequest request,String Parentpath){
+            
+            File path = new File(Parentpath);
+            FileItemFactory itemfactory = new DiskFileItemFactory(); 
+            ServletFileUpload upload = new ServletFileUpload(itemfactory);
+            try{
+                    List<FileItem>  items = upload.parseRequest(request);
+                    String pathImage = path.getParentFile().getParentFile()+ "\\web\\upload\\images_teams";
+                    
+                    for(FileItem item:items){
+                    if (item.getName() != null) {
+                        if(validatePhoto(item.getName())){
+                            File uploadDir = new File(pathImage);
+                            File file = File.createTempFile("img",".png",uploadDir);
+                            item.write(file);
+                        }else{
+                            return null;
+                        }
+                    }
+                }
+                return pathImage;
+            }
+            catch(FileUploadException e){
+                 System.out.println("Error: " + e.getMessage());
+                 return null;
+            }
+            catch(Exception ex){
+                 System.out.println("Error: " + ex.getMessage() + " csaca :" + ex.getCause());
+                 return null;
+            }
+    }
+    public boolean validateServlet(HttpServletRequest request){
+         return ServletFileUpload.isMultipartContent(request);
+    }
 }
