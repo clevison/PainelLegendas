@@ -13,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 import model.User;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
@@ -29,6 +30,7 @@ public class create_team extends HttpServlet {
             throws ServletException, IOException {
             
             User user = (User)request.getAttribute("user");
+            System.out.println("user:" +user);
             
             DiskFileItemFactory factory = new DiskFileItemFactory();
             ServletFileUpload upload = new ServletFileUpload(factory);
@@ -52,7 +54,8 @@ public class create_team extends HttpServlet {
                 RequestDispatcher rs = request.getRequestDispatcher("/pages/error.jsp?message=Ocorreu um erro inesperado&cause=Tente novamente mais tarde. Se o erro persistir Contate um administrador pelo email suporte@painellegendas.com");
                 rs.forward(request, response);
             }
-            System.out.println("user:" +user);
+            
+            
             
             //Get path the application
             ServletContext servletContext = getServletContext();
@@ -64,9 +67,12 @@ public class create_team extends HttpServlet {
                     if (teamBO.validateName(name)){
                         String pathImage = teamBO.uploadImage(request,contextPath);
                         if( pathImage != null){
-                             /* if(teamBO.insertUser(name, message, pathImage,)){
+                             // if(teamBO.insertUser(name, message, pathImage,)){
                                     response.sendRedirect(request.getContextPath()+"/pages/main.jsp");
-                              }*/
+                              /*}else{
+                                 RequestDispatcher rs = request.getRequestDispatcher("/pages/error.jsp?message=Ocorreu um erro inesperado&cause=Tente novamente mais tarde. Se o erro persistir Contate um administrador pelo email suporte@painellegendas.com");
+				 rs.forward(request, response);
+                            }*/
                                System.out.println("Validou Tudo sadsadsadsa");
                         }else{
                             response.sendRedirect(request.getContextPath()+"/pages/create_team.jsp?message=Upload falhou !&cause=Nao foi possivel upar o arquivo, ou o extensao invalida");

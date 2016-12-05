@@ -16,6 +16,7 @@ public class UserDAO implements ILogin{
                 int permission =1;
 	        try {
 	            con = connection.connectionMySQL();
+                    
 	            PreparedStatement exe = con.prepareStatement("INSERT INTO user(nickname, email, password, id_perm) VALUES ('" + user.getNickname()+ "', '" 
                     + user.getEmail() + "', '" + user.getPassword() + "', '" + permission + "')");
 	            int performed = exe.executeUpdate();

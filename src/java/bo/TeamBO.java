@@ -72,6 +72,7 @@ public class TeamBO{
                     String pathImage = path.getParentFile().getParentFile()+ "\\web\\upload\\images_teams";
                     
                     for(FileItem item:items){
+                        System.out.println(item + "------");
                     if (item.getName() != null) {
                         if(validatePhoto(item.getName())){
                             File uploadDir = new File(pathImage);
