@@ -4,23 +4,25 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
 import model.Team;
-import model.User;
 
 public class TeamDAO{
 	 ConnectionMySQL connection = new ConnectionMySQL();
 	    
-	 	public int insert(Team team) throws SQLException {
+	 	public boolean insert(Team team) throws SQLException {
 	        Connection con;
                 int permission =1;
 	        try {
 	            con = connection.connectionMySQL();
-	            PreparedStatement exe = con.prepareStatement("INSERT INTO team(name, message, photo, admim) VALUES ('" + team.getName() + "', '" 
-                    + team.getMessage()+ "', '" + team.getPhoto() + "', '" + team.getAdmim().getId_User() + "')");
-	            int performed = exe.executeUpdate();
-	            return performed; 
+                    String sql = "INSERT INTO team(name, message, photo, admim) VALUES(?,?,?,?)";
+	            PreparedStatement exe = con.prepareStatement(sql);
+                    exe.setString(1, team.getName());
+                    exe.setString(2, team.getMessage());
+                    exe.setString(3, team.getPhoto());
+                    exe.setInt(4, team.getAdmim().getId_User());
+                    exe.execute();
+                    exe.close();
+	            return true; 
 	        } catch (SQLException e) {
 	            throw new SQLException("Erro: " + e.getMessage());
 	        }

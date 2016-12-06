@@ -11,35 +11,43 @@ import model.User;
 public class UserDAO implements ILogin{
 	 ConnectionMySQL connection = new ConnectionMySQL();
 	    
-	 	public int insert(User user) throws SQLException {
+            public boolean insert(User user) throws SQLException {
 	        Connection con;
-                int permission =1;
+                String permission = "1";
 	        try {
 	            con = connection.connectionMySQL();
+                    String sql = "INSERT INTO user(nickname, email, password, id_perm) VALUES (?,?,?,?)"; 
+                    PreparedStatement exe = con.prepareStatement(sql);
+                    exe.setString(1,user.getNickname());
+                    exe.setString(2,user.getEmail());
+                    exe.setString(3,user.getPassword());
+                    exe.setString(4,permission);
                     
-	            PreparedStatement exe = con.prepareStatement("INSERT INTO user(nickname, email, password, id_perm) VALUES ('" + user.getNickname()+ "', '" 
-                    + user.getEmail() + "', '" + user.getPassword() + "', '" + permission + "')");
-	            int performed = exe.executeUpdate();
-	            return performed; 
+                    exe.execute();
+                    exe.close();
+	            return true; 
 	        } catch (SQLException e) {
 	            throw new SQLException("Erro: " + e.getMessage());
 	        }
-	    }       
+	    }     
             @Override
             public User login(String nickname, String password) throws SQLException {
                Connection con;
                User user = new User();
                try {
                         con = connection.connectionMySQL();
-                        PreparedStatement exe = con.prepareStatement
-                                    ("SELECT * FROM user WHERE nickname = '" + nickname + "' AND password = '" + password + "'");
+                        String sql = "SELECT * FROM user WHERE nickname = ? AND password = ?";
+                        PreparedStatement exe = con.prepareStatement(sql);
+                        exe.setString(1, nickname);
+                        exe.setString(2, password);
+                        
                         ResultSet rs = exe.executeQuery();
-                        if (rs.first()) {
+                        
+                        if (rs.next()) {
                             user.setId_User(Integer.parseInt(rs.getString("id_user")));
                             user.setNickname(rs.getString("nickname"));
-                           // user.setPassword(rs.getString("password"));
                             user.setPermission(Integer.parseInt(rs.getString("id_perm")));
-                        return user;
+                            return user;
                         }else{
                             return null;
                         }

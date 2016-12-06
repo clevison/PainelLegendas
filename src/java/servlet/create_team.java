@@ -6,6 +6,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -29,64 +30,57 @@ public class create_team extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
             
-            User user = (User)request.getAttribute("user");
-            System.out.println("user:" +user);
-            
-            DiskFileItemFactory factory = new DiskFileItemFactory();
-            ServletFileUpload upload = new ServletFileUpload(factory);
-            String name="";
-            String message="";
-            try {
-                List<FileItem> formItems = upload.parseRequest(request);
-                for (FileItem item : formItems) {
-                    String fieldname = item.getFieldName();
-                    String fieldvalue = item.getString();
-                    switch (fieldname) {
-                        case "name":
-                            name = fieldvalue;
-                            break;
-                        case "message":
-                            message = fieldvalue;
-                            break;
-                    }
-                }
-            }catch(FileUploadException ex) {
-                RequestDispatcher rs = request.getRequestDispatcher("/pages/error.jsp?message=Ocorreu um erro inesperado&cause=Tente novamente mais tarde. Se o erro persistir Contate um administrador pelo email suporte@painellegendas.com");
-                rs.forward(request, response);
-            }
-            
-            
-            
-            //Get path the application
+            //User user = (User)request.getAttribute("user");
+           
+            TeamBO teamBO =  new TeamBO();
             ServletContext servletContext = getServletContext();
             String contextPath = servletContext.getRealPath(File.separator);
-            TeamBO teamBO =  new TeamBO();
+            Map<String,String> items = teamBO.uploadImage(request,contextPath);
+            User user = (User)request.getSession(false).getAttribute("user");
             
-            if (teamBO.validateServlet(request)) {
-                if (teamBO.validateInput(name)){
-                    if (teamBO.validateName(name)){
-                        String pathImage = teamBO.uploadImage(request,contextPath);
-                        if( pathImage != null){
-                             // if(teamBO.insertUser(name, message, pathImage,)){
+            if (items == null) {
+                response.sendRedirect(request.getContextPath()+"/pages/create_team.jsp?message=Upload falhou !&cause=Nao foi possivel upar o arquivo, ou o extensao invalida");
+            } else {
+                
+                 String name = items.get("name");
+                 String message = items.get("message");
+                 String pathImage = items.get("path");
+                 
+                if (teamBO.validateServlet(request)) {
+                    if (teamBO.validateInput(name)){
+                        if (teamBO.validateName(name)){
+                            if( pathImage != null){
+                                if(teamBO.insertTeam(name, message,pathImage,user)){
                                     response.sendRedirect(request.getContextPath()+"/pages/main.jsp");
-                              /*}else{
-                                 RequestDispatcher rs = request.getRequestDispatcher("/pages/error.jsp?message=Ocorreu um erro inesperado&cause=Tente novamente mais tarde. Se o erro persistir Contate um administrador pelo email suporte@painellegendas.com");
-				 rs.forward(request, response);
-                            }*/
-                               System.out.println("Validou Tudo sadsadsadsa");
+                                }else{
+                                    removeImage(pathImage);
+                                    RequestDispatcher rs = request.getRequestDispatcher("/pages/error.jsp?message=Ocorreu um erro inesperado&cause=Tente novamente mais tarde. Se o erro persistir Contate um administrador pelo email suporte@painellegendas.com");
+                                    rs.forward(request, response);
+                                }
+                            }else{
+                                removeImage(pathImage);
+                                response.sendRedirect(request.getContextPath()+"/pages/create_team.jsp?message=Upload falhou !&cause=Nao foi possivel upar o arquivo, ou o extensao invalida");
+                            }
                         }else{
-                            response.sendRedirect(request.getContextPath()+"/pages/create_team.jsp?message=Upload falhou !&cause=Nao foi possivel upar o arquivo, ou o extensao invalida");
+                            removeImage(pathImage);
+                            response.sendRedirect(request.getContextPath()+"/pages/create_team.jsp?message=Nome invalido !&cause=Equipe ja cadastrada com esse nome");
                         }
                     }else{
-                        response.sendRedirect(request.getContextPath()+"/pages/create_team.jsp?message=Nome invalido !&cause=Equipe ja cadastrada com esse nome");
+                        removeImage(pathImage);
+                        response.sendRedirect(request.getContextPath()+"/pages/create_team.jsp?message=Dados invalidos !&cause=Os Dados nao podem ser vazios");
                     }
                 }else{
-                    response.sendRedirect(request.getContextPath()+"/pages/create_team.jsp?message=Dados invalidos !&cause=Os Dados nao podem ser vazios");
-                }
-             }else{
+                    removeImage(pathImage);
                     response.sendRedirect(request.getContextPath()+"/pages/create_team.jsp?message=Dados invalidos !&cause=Este servlet lida apenas com pedido de upload");
+                }
             }
-            
-            
+    }
+    public void removeImage(String path){
+        try{
+             File file  = new File(path);
+             file.delete();
+        }catch(Exception ex){
+           System.out.println(ex.toString());
+        }
     }
 }

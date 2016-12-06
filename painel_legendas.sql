@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 24-Nov-2016 às 19:20
+-- Generation Time: 06-Dez-2016 às 21:34
 -- Versão do servidor: 10.1.13-MariaDB
 -- PHP Version: 5.6.21
 
@@ -112,10 +112,18 @@ CREATE TABLE `status` (
 
 CREATE TABLE `team` (
   `id_team` int(11) NOT NULL,
-  `name` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `message` varchar(300) NOT NULL,
   `photo` varchar(200) NOT NULL,
   `admim` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `team`
+--
+
+INSERT INTO `team` (`id_team`, `name`, `message`, `photo`, `admim`) VALUES
+(1, 'Insubis', 'Uma mensagem', 'C:\\Users\\clevi\\Documents\\NetBeansProjects\\PainelLegendas\\web\\upload\\images_teams', 7);
 
 -- --------------------------------------------------------
 
@@ -140,7 +148,7 @@ CREATE TABLE `user` (
   `id_user` int(11) NOT NULL,
   `nickname` varchar(50) NOT NULL,
   `email` varchar(100) NOT NULL,
-  `password` varchar(50) NOT NULL,
+  `password` varchar(100) NOT NULL,
   `id_perm` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -149,7 +157,8 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id_user`, `nickname`, `email`, `password`, `id_perm`) VALUES
-(5, 'Clevison', 'clevison.luiz@gmail.com', '123', 1);
+(7, 'teste', 'teste@teste.com', '0BF57090EC4FE93310221F1E43F9D16C023444401FBA5DAB9D9D7842AB30056A', 1),
+(8, 'Clevison', 'clevison.luiz@gmail.com', '0BF57090EC4FE93310221F1E43F9D16C023444401FBA5DAB9D9D7842AB30056A', 1);
 
 --
 -- Indexes for dumped tables
@@ -199,7 +208,8 @@ ALTER TABLE `status`
 --
 ALTER TABLE `team`
   ADD PRIMARY KEY (`id_team`),
-  ADD UNIQUE KEY `un_nome` (`name`);
+  ADD UNIQUE KEY `un_nome` (`name`),
+  ADD KEY `name` (`name`);
 
 --
 -- Indexes for table `team_user`
@@ -252,7 +262,7 @@ ALTER TABLE `status`
 -- AUTO_INCREMENT for table `team`
 --
 ALTER TABLE `team`
-  MODIFY `id_team` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_team` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `team_user`
 --
@@ -262,7 +272,7 @@ ALTER TABLE `team_user`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

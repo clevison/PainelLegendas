@@ -51,7 +51,7 @@ public class FilterLogin implements Filter {
 
         HttpSession sessao = httpServletRequest.getSession();
 
-        if (sessao.getAttribute("user") != null || url.lastIndexOf("login.jsp")>-1){
+        if (sessao.getAttribute("user") != null || url.lastIndexOf("login.jsp")>-1 || url.lastIndexOf("register.jsp")>-1){
                chain.doFilter(request, response); 
         }else{
              ((HttpServletResponse) response).sendRedirect(httpServletRequest.getContextPath()+"/pages/login.jsp");

@@ -6,15 +6,17 @@
 
 package bo;
 
+import com.sun.corba.se.impl.orbutil.GetPropertyAction;
 import dao.TeamDAO;
 import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import static java.security.AccessController.doPrivileged;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
-import javax.imageio.ImageIO;
-import static javax.imageio.ImageIO.getCacheDirectory;
-import javax.servlet.ServletContext;
+import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
-import static javax.swing.text.DefaultStyledDocument.ElementSpec.ContentType;
 import model.Team;
 import model.User;
 import org.apache.commons.fileupload.FileItem;
@@ -62,7 +64,54 @@ public class TeamBO{
     public boolean validatePhoto(String photo){
          return "png".equals(FilenameUtils.getExtension(photo)) || "jpg".equals(FilenameUtils.getExtension(photo).toLowerCase());
     }; 
-    public String uploadImage(HttpServletRequest request,String Parentpath){
+    public Map uploadImage(HttpServletRequest request,String Parentpath){
+            
+            File path = new File(Parentpath);
+            FileItemFactory itemfactory = new DiskFileItemFactory(); 
+            ServletFileUpload upload = new ServletFileUpload(itemfactory);
+            Map<String, String> map = new HashMap<>();
+            try{
+                    List<FileItem>  items = upload.parseRequest(request);
+                    String pathImage = path.getParentFile().getParentFile()+ "\\web\\upload\\images_teams";
+                   
+                    for(FileItem item:items){
+                        
+                    if (!item.isFormField() && !"".equals(item.getName())){
+                        if(validatePhoto(item.getName())){
+                            File uploadDir = new File(pathImage);
+                            File file = File.createTempFile("img",".png",uploadDir);
+                            map.put("path",file.getAbsoluteFile().toString());
+                            item.write(file);
+                        }else{
+                            map = null;
+                            return map;
+                        }
+                    }
+                    
+                    String fieldname = item.getFieldName();
+                    String fieldvalue = item.getString();
+                    switch (fieldname) {
+                        case "name":
+                            map.put(fieldname,fieldvalue);
+                            break;
+                        case "message":
+                           map.put(fieldname,fieldvalue);
+                            break;
+                    }
+               }
+                     
+               return map; 
+            }
+            catch(FileUploadException e){
+                 System.out.println("Error: " + e.getMessage());
+                 return null;
+            }
+            catch(Exception ex){
+                 System.out.println("Error: " + ex.getMessage() + " csaca :" + ex.getCause());
+                 return null;
+            }
+    }
+    /*public String uploadImage(HttpServletRequest request,String Parentpath){
             
             File path = new File(Parentpath);
             FileItemFactory itemfactory = new DiskFileItemFactory(); 
@@ -70,7 +119,7 @@ public class TeamBO{
             try{
                     List<FileItem>  items = upload.parseRequest(request);
                     String pathImage = path.getParentFile().getParentFile()+ "\\web\\upload\\images_teams";
-                    
+                        System.out.println("Entrou aqui ------");
                     for(FileItem item:items){
                         System.out.println(item + "------");
                     if (item.getName() != null) {
@@ -93,7 +142,7 @@ public class TeamBO{
                  System.out.println("Error: " + ex.getMessage() + " csaca :" + ex.getCause());
                  return null;
             }
-    }
+    }*/
     public boolean validateServlet(HttpServletRequest request){
          return ServletFileUpload.isMultipartContent(request);
     }

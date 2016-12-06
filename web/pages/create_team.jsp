@@ -45,12 +45,12 @@
                         </div>
                         <div class="modal-body">
                                 <form method="POST" action="${pageContext.request.contextPath}/create_team" enctype="multipart/form-data">
-                                        <p><input type="text" name="name" class="myInput" placeholder="Nome da equipe"></p>
+                                    <p><input type="text" name="name" class="myInput" placeholder="Nome da equipe" required ></p>
                                         <p><textarea class="myInput" name="message" placeholder="Mensagem" maxlength="300" rows="5"></textarea></p>
                                         <input id="uploadFile"  placeholder="Selecione uma imagem..." disabled="disabled" />
                                              <div class="fileUpload btn btn-primary">
                                                 <span>Upload</span>
-                                                <input id="uploadBtn" name="file" type="file" class="upload myInput" />
+                                                <input id="uploadBtn" name="file" type="file" class="upload myInput" required />
                                             </div>
                                         <p><input type="submit" class="btn btn-success" value="Enviar"></p>
                                 </form>
