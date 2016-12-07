@@ -21,30 +21,6 @@
 
 <body class="home" id="container">
 
-	
-
-	<!-- Modal to edit profile -->
-	<div class="modal fade" id="editProfileModal" role="dialog" tabindex="-1">
-		<div class="modal-dialog modal-sm">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title">Editar perfil</h4>
-				</div>
-				<div class="modal-body">
-					<form>
-						<p><input type="text" class="myInput" placeholder="Novo nome de usuário" value="{nickname}"></p>
-						<p><input type="email" class="myInput" placeholder="Novo e-mail" value="{email}"></p>
-						<p><input type="password" class="myInput" placeholder="Nova senha" value="{senha}"></p>
-						<br />
-						<p><input type="submit" class="btn btn-success" value="Salvar"></p>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- /Modal to edit profile -->
-	
 	<!-- Modal to request entry -->
 	<div class="modal fade" id="requestModal" role="dialog" tabindex="-1">
 		<div class="modal-dialog modal-sm">

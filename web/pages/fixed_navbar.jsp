@@ -13,9 +13,10 @@
                   + "<li class='dropdown'>"
                   + "<a href='#' class='dropdown-toggle' data-toggle='dropdown'>Olá,"+user.getNickname()+" <b class='caret'></b></a>"
                      + "<ul class='dropdown-menu'>"
-                       + "<li><a href='#' data-toggle='modal' data-target='#editProfileModal'>Editar perfil</a></li>"
+                       + "<li><a href='"+path+"/pages/edit_profile.jsp'>Editar perfil</a></li>"
+                        + "<li><a href='"+path+"/pages/edit_password.jsp'>Alterar senha</a></li>"
                                 + "<li><a href='"+path+"/logout'>Sair</a></li>"
-                                    +"</ul></li>";
+                       +"</ul>";
         }else{
             link = path+"/index.jsp";
             menu = "<li class='active'><a href='"+path+"/index.jsp'>Página inicial</a></li>" 

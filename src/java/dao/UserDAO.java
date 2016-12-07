@@ -46,6 +46,7 @@ public class UserDAO implements ILogin{
                         if (rs.next()) {
                             user.setId_User(Integer.parseInt(rs.getString("id_user")));
                             user.setNickname(rs.getString("nickname"));
+                            user.setEmail(rs.getString("email"));
                             user.setPermission(Integer.parseInt(rs.getString("id_perm")));
                             return user;
                         }else{
@@ -56,89 +57,137 @@ public class UserDAO implements ILogin{
                 }
             }
 	    
-	    public int updateEmail(User usuario) throws SQLException {
-	        Statement stmt;
+	    public boolean updateEmail(User user) throws SQLException {
+                Connection con;
 	        try {
-	            stmt = connection.connectionMySQL().createStatement();
-	            String exe = "UPDATE usuario SET Email = '" + usuario.getEmail() + "'"
-	                    + " WHERE id_usu = '" + usuario.getId_User() +"'";
-	            stmt.executeUpdate(exe);
-	            return 1;
+                    String sql = "UPDATE user SET Email =? Where id_user=?";
+                    con = connection.connectionMySQL();
+                    PreparedStatement exe = con.prepareStatement(sql);
+                    exe.setString(1, user.getEmail());
+                    exe.setInt(2, user.getId_User());
+                    exe.execute();
+                    exe.close();
+	            return true;
 	        } catch (SQLException e) {
 	            throw new SQLException("Erro: " + e.getMessage());
 	        }
 	    }   
 	    
-	    public int updateSenha(User usuario) throws SQLException {
-	        Statement stmt;
+	    public boolean updatePassword(User user) throws SQLException {
+                Connection con;
 	        try {
-	            stmt = connection.connectionMySQL().createStatement();
-	            String exe = "UPDATE usuario SET senha = '" + usuario.getPassword() + "'"
-	                    + " WHERE id_usu = '" + usuario.getId_User() +"'";
-	            stmt.executeUpdate(exe);
-	            return 1;
+	             String sql = "UPDATE user SET password =? Where id_user=?";
+                        con = connection.connectionMySQL();
+                        PreparedStatement exe = con.prepareStatement(sql);
+                        exe.setString(1, user.getPassword());
+                        exe.setInt(2, user.getId_User());
+                        exe.execute();
+                        exe.close();
+                        return true;
 	        } catch (SQLException e) {
 	            throw new SQLException("Erro: " + e.getMessage());
 	        }
 	    }    
 	    
-	    public int updateNick(User usuario) throws SQLException {
-	        Statement stmt;
+	    public boolean updateNick(User user) throws SQLException {
+                Connection con;
 	        try {
-	            stmt = connection.connectionMySQL().createStatement();
-	            String exe = "UPDATE usuario SET nick = '" + usuario.getNickname() + "'"
-	                    + " WHERE id_usu = '" + usuario.getId_User() +"'";
-            stmt.executeUpdate(exe);
-	            return 1;
+	             String sql = "UPDATE user SET nickname =? Where id_user=?";
+                        con = connection.connectionMySQL();
+                        PreparedStatement exe = con.prepareStatement(sql);
+                        exe.setString(1, user.getNickname());
+                        exe.setInt(2, user.getId_User());
+                        exe.execute();
+                        exe.close();
+                        return true;
 	        } catch (SQLException e) {
 	            throw new SQLException("Erro: " + e.getMessage());
 	        }
 	    }    
 	   	    
-	    public int delete(String nick) throws SQLException {
-	        Statement stmt;
+	    public boolean delete(User user) throws SQLException {
+                Connection con;
 	        try {
-	            stmt = connection.connectionMySQL().createStatement();
-	            String exe = "DELETE FROM usuario  WHERE nick = '" + nick +"'";
-	            stmt.executeUpdate(exe);
-	            return 1;
+	             String sql = "Delete From user Where id_user=?";
+                        con = connection.connectionMySQL();
+                        PreparedStatement exe = con.prepareStatement(sql);
+                        exe.setInt(1, user.getId_User());
+                        exe.execute();
+                        exe.close();
+                        return true;
 	        } catch (SQLException e) {
 	            throw new SQLException("Erro: " + e.getMessage());
 	        }
 	    } 
-	    public ArrayList<User> listarUsuarios() throws SQLException{
+	    
+            public ArrayList<User> listUsers() throws SQLException{
 	        ResultSet rs;
 	        PreparedStatement pstm;
-	        ArrayList<User> usuarios = new ArrayList<>();
+	        ArrayList<User> users = new ArrayList<>();
+                String sql = "SELECT * FROM user";
 	        try {
-	            pstm = connection.connectionMySQL().prepareStatement("SELECT * FROM usuario");
+	            pstm = connection.connectionMySQL().prepareStatement(sql);
 	            rs = pstm.executeQuery();
 	            while (rs.next()) {
-	            	User usuario = new User();
-	            	usuario.setId_User(Integer.parseInt(rs.getString("id_usu")));
-	            	usuario.setNickname(rs.getString("nick"));
-	            	usuario.setEmail(rs.getString("email"));
-	            	usuarios.add(usuario);
+	            	User user = new User();
+	            	user.setId_User(Integer.parseInt(rs.getString("id_user")));
+	            	user.setNickname(rs.getString("nickname"));
+	            	user.setEmail(rs.getString("email"));
+	            	users.add(user);
 	            }
-	            return usuarios;
+	            return users;
 	        } catch (SQLException e) {
 	        	throw new SQLException("Erro: " + e.getMessage());
 	        }
 	    }
 	    
-	    public User buscarPorId(int id) throws SQLException{
+	    public User SeekForId(int id) throws SQLException{
 	        ResultSet rs;
 	        PreparedStatement pstm;
+                String sql = "SELECT * FROM user where id_usu = ?";
 	       try {
-	            pstm = connection.connectionMySQL().prepareStatement("SELECT * FROM usuario where id_usu = " + id);
+	            pstm = connection.connectionMySQL().prepareStatement(sql);
+                    pstm.setInt(1, id);
 	            rs = pstm.executeQuery();
 	            User usuario = new User();
 	            while (rs.next()) {
-	            	usuario.setId_User(Integer.parseInt(rs.getString("id_usu")));
-	            	usuario.setNickname(rs.getString("nick"));
+	            	usuario.setId_User(Integer.parseInt(rs.getString("id_user")));
+	            	usuario.setNickname(rs.getString("nickname"));
 	            	usuario.setEmail(rs.getString("email"));	            	 
 	            }
 	            return usuario;
+	        } catch (SQLException e) {
+	        	throw new SQLException("Erro: " + e.getMessage());
+	        }
+	    }
+            
+            public int searchCurrentData(String field, String search) throws SQLException{
+	        ResultSet rs;
+                int id_user = -1;
+	        try {
+	            String exe = "select * FROM user WHERE " + field + " = '" + search +"'";
+	            PreparedStatement pstm = connection.connectionMySQL().prepareStatement(exe);
+	            rs = pstm.executeQuery();
+	            while (rs.next()) {
+                        id_user = rs.getInt("id_user");
+                    }
+	            return id_user;
+	        } catch (SQLException e) {
+	        	throw new SQLException("Erro: " + e.getMessage());
+	        }
+	    }
+            
+            public String searchData(String field, String search,String dataReturn) throws SQLException{
+	        ResultSet rs;
+                String data = null;
+	        try {
+	            String exe = "select * FROM user WHERE " + field + " = '" + search +"'";
+	            PreparedStatement pstm = connection.connectionMySQL().prepareStatement(exe);
+	            rs = pstm.executeQuery();
+	            while (rs.next()) {
+                        data = rs.getString(dataReturn);
+                    }
+	            return data;
 	        } catch (SQLException e) {
 	        	throw new SQLException("Erro: " + e.getMessage());
 	        }
