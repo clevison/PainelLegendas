@@ -25,7 +25,7 @@
         <%
             String title = request.getParameter("message");
             if(title == null){
-                title = "Editar Perfil";
+                title = "Alterar Senha";
             }
             String subTitle = request.getParameter("cause");
             if(subTitle == null){
@@ -46,7 +46,7 @@
 				</div>
 				<div class="modal-body">
 					<form method="POST" action="../edit_password">
-                                                <p><input type="password" name="lastPassword" required class="myInput" id="antigaSenha" placeholder="Senha"></p>
+                                                <p><input type="password" name="lastPassword" required class="myInput" id="antigaSenha" placeholder="Senha Antiga"></p>
                                                 <p><input type="password" required class="myInput" id="primeiraSenha" placeholder="Nova Senha"></p>
 						<p><input type="password" name="password" required class="myInput" placeholder="Confirme sua Nova senha" oninput="validarSenha(this)"></p>
 						<br />
