@@ -7,7 +7,7 @@
         String link;
         if(user != null){
              link = path+"/pages/main.jsp";
-             menu = "<li class='active'><a href='"+path+"/pages/teams.jsp'>Equipes cadastradas</a></li>"
+             menu = "<li class='active'><a href='"+path+"/teams'>Equipes cadastradas</a></li>"
                   + "<li class='active'><a href='"+path+"/pages/about.jsp'>Sobre o site</a></li>"
                   + "<li><a href='"+path+"/pages/create_team.jsp' class='btn' data-toggle='modal'>CRIAR EQUIPE</a></li>"
                   + "<li class='dropdown'>"
@@ -20,7 +20,6 @@
         }else{
             link = path+"/index.jsp";
             menu = "<li class='active'><a href='"+path+"/index.jsp'>Página inicial</a></li>" 
-                 + "<li class='active'><a href='"+path+"/pages/teams.jsp'>Equipes cadastradas</a></li>"
                  + "<li class='active'><a href='"+path+"/pages/about.jsp'>Sobre o site</a></li>"
                  + "<li class='active'><a href='"+path+"/pages/login.jsp' class='btn'>ENTRAR</a></li>";
         }

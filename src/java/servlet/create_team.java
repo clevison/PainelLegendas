@@ -37,12 +37,13 @@ public class create_team extends HttpServlet {
                  String name = items.get("name");
                  String message = items.get("message");
                  String pathImage = items.get("path");
+                 String nameFile = items.get("nameFile");
                  
                 if (teamBO.validateServlet(request)) {
                     if (teamBO.validateInput(name)){
                         if (teamBO.validateName(name)){
                             if( pathImage != null){
-                                if(teamBO.insertTeam(name, message,pathImage,user)){
+                                if(teamBO.insertTeam(name, message,nameFile,user)){
                                     response.sendRedirect(request.getContextPath()+"/pages/main.jsp");
                                 }else{
                                     removeImage(pathImage);
