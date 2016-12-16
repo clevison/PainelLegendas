@@ -6,9 +6,10 @@
         String path = getServletContext().getContextPath();
         String link;
         if(user != null){
-             link = path+"/pages/main.jsp";
-             menu = "<li class='active'><a href='"+path+"/teams'>Equipes cadastradas</a></li>"
-                  + "<li class='active'><a href='"+path+"/pages/about.jsp'>Sobre o site</a></li>"
+             link = path+"/main";
+             menu = "<li class='active'><a href='"+path+"/main'>Minhas equipes</a></li>"
+                  +"<li class='active'><a href='"+path+"/teams'>Equipes cadastradas</a></li>"
+                  + "<li class='active'><a href='"+path+"/about.jsp'>Sobre o site</a></li>"
                   + "<li><a href='"+path+"/pages/create_team.jsp' class='btn' data-toggle='modal'>CRIAR EQUIPE</a></li>"
                   + "<li class='dropdown'>"
                   + "<a href='#' class='dropdown-toggle' data-toggle='dropdown'>Olá,"+user.getNickname()+" <b class='caret'></b></a>"
@@ -20,7 +21,7 @@
         }else{
             link = path+"/index.jsp";
             menu = "<li class='active'><a href='"+path+"/index.jsp'>Página inicial</a></li>" 
-                 + "<li class='active'><a href='"+path+"/pages/about.jsp'>Sobre o site</a></li>"
+                 + "<li class='active'><a href='"+path+"/about.jsp'>Sobre o site</a></li>"
                  + "<li class='active'><a href='"+path+"/pages/login.jsp' class='btn'>ENTRAR</a></li>";
         }
 %>

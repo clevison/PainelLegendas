@@ -29,7 +29,7 @@ import org.apache.commons.io.FilenameUtils;
  */
 public class TeamBO{
     //Crud AREA
-    public boolean insertTeam(String name, String message,  String photo, User user){       
+    public boolean insertTeam(String name, String message,  String photo, int user){       
         
         try {
            Team team = new Team();
@@ -122,10 +122,19 @@ public class TeamBO{
             }
     }
     
-    public ArrayList<Team> listTeam(){
+    public ArrayList<Team> listTeam(User user){
         TeamDAO teamDAO =  new TeamDAO();
          try {
-              return teamDAO.listTeams();
+              return teamDAO.listTeams(user);
+         } catch (SQLException e) {
+             System.out.println(e.getMessage());
+             return null;
+         }
+    }
+    public ArrayList<Team> listMyTeam(User user){
+        TeamDAO teamDAO =  new TeamDAO();
+         try {
+              return teamDAO.listMyTeams(user);
          } catch (SQLException e) {
              System.out.println(e.getMessage());
              return null;

@@ -28,7 +28,7 @@ public class Login extends HttpServlet {
                  User user = userBo.login(nick, password);
                 if(user != null) {
                     session.setAttribute("user", user);
-                    response.sendRedirect(request.getContextPath()+"/pages/main.jsp");
+                    response.sendRedirect(request.getContextPath()+"/main");
                 } else {
                    response.sendRedirect(request.getContextPath()+"/pages/login.jsp?message=Login invalido !&cause=Usuario ou senha incorretos");
                 }

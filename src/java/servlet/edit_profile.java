@@ -54,7 +54,7 @@ public class edit_profile extends HttpServlet {
                     }
                     
                     request.getSession().setAttribute("user", newUser);
-                    response.sendRedirect(request.getContextPath()+"/pages/main.jsp");
+                    response.sendRedirect(request.getContextPath()+"/main");
                     
             }else{
                 response.sendRedirect(request.getContextPath()+"/pages/edit_profile.jsp?message=Dados invalidos !&cause=Os Dados nao podem ser vazios");

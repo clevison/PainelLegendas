@@ -21,7 +21,7 @@ public class TeamDAO{
                     exe.setString(1, team.getName());
                     exe.setString(2, team.getMessage());
                     exe.setString(3, team.getPhoto());
-                    exe.setInt(4, team.getAdmim().getId_User());
+                    exe.setInt(4, team.getAdmim());
                     exe.execute();
                     exe.close();
 	            return true; 
@@ -41,12 +41,15 @@ public class TeamDAO{
 	            throw new SQLException("Erro: " + e.getMessage());
 	        }
 	    }
-            public ArrayList<Team> listTeams() throws SQLException{
+            public ArrayList<Team> listTeams(User user) throws SQLException{
 	        ResultSet rs;
 	        PreparedStatement pstm;
                 UserDAO userDAO = null;
 	        ArrayList<Team> teams = new ArrayList<>();
-                String sql = "SELECT * FROM team";
+                String sql = "SELECT team.id_team, team.name, team.message, team.photo, team.admim,team_user.id_user " +
+                "FROM team LEFT JOIN team_user " +
+                "ON team.id_team = team_user.id_team_user " +
+                "WHERE team_user.id_user != "+ user.getId_User() +" OR team_user.id_user IS NULL";
 	        try {
 	            pstm = connection.connectionMySQL().prepareStatement(sql);
 	            rs = pstm.executeQuery();
@@ -56,9 +59,33 @@ public class TeamDAO{
 	            	team.setName(rs.getString("name"));
                         team.setMessage(rs.getString("message"));
 	            	team.setPhoto(rs.getString("photo"));
-                        User user;
-                        //user = userDAO.SeekForId(Integer.parseInt(rs.getString("admim")));
-                       // team.setAdmim(user);
+                        team.setAdmim(Integer.parseInt(rs.getString("id_team")));
+	            	teams.add(team);
+	            }
+	            return teams;
+	        } catch (SQLException e) {
+	        	throw new SQLException("Erro: " + e.getMessage());
+	        }
+	    }
+            public ArrayList<Team> listMyTeams(User user) throws SQLException{
+	        ResultSet rs;
+	        PreparedStatement pstm;
+                UserDAO userDAO = null;
+	        ArrayList<Team> teams = new ArrayList<>();
+                String sql = "SELECT team.id_team, team.name, team.message, team.photo, team.admim,team_user.id_user " +
+                             "FROM team INNER JOIN team_user " +
+                             "ON team.id_team = team_user.id_team_user " +
+                             "WHERE team_user.id_user =" + user.getId_User();
+	        try {
+	            pstm = connection.connectionMySQL().prepareStatement(sql);
+	            rs = pstm.executeQuery();
+	            while (rs.next()) {
+	            	Team team = new Team();
+	            	team.setId_Team(Integer.parseInt(rs.getString("id_team")));
+	            	team.setName(rs.getString("name"));
+                        team.setMessage(rs.getString("message"));
+	            	team.setPhoto(rs.getString("photo"));
+                        team.setAdmim(Integer.parseInt(rs.getString("id_team")));
 	            	teams.add(team);
 	            }
 	            return teams;

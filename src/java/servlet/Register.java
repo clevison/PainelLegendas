@@ -30,7 +30,7 @@ public class Register extends HttpServlet {
                         if (userBO.validateEmail(email)) {
                             
                                 if(userBO.insertUser(nick, email, password)){
-                                    response.sendRedirect(request.getContextPath()+"/pages/main.jsp");
+                                    response.sendRedirect(request.getContextPath()+"/main");
                                 }else{
                                  RequestDispatcher rs = request.getRequestDispatcher("/pages/error.jsp?message=Ocorreu um erro inesperado&cause=Tente novamente mais tarde. Se o erro persistir Contate um administrador pelo email suporte@painellegendas.com");
 				 rs.forward(request, response);

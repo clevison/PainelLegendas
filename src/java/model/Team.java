@@ -5,7 +5,7 @@ public class Team {
         private String name;
         private String message;
         private String photo;
-        private User admim;
+        private int admim;
         
         public int getId_Team() {
             return id_Team;
@@ -39,11 +39,11 @@ public class Team {
             this.photo = photo;
         }
 
-        public User getAdmim() {
+        public int getAdmim() {
             return admim;
         }
 
-        public void setAdmim(User admim) {
+        public void setAdmim(int admim) {
             this.admim = admim;
         }
 }

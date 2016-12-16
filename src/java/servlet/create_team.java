@@ -22,8 +22,6 @@ public class create_team extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
             
-            //User user = (User)request.getAttribute("user");
-           
             TeamBO teamBO =  new TeamBO();
             ServletContext servletContext = getServletContext();
             String contextPath = servletContext.getRealPath(File.separator);
@@ -43,8 +41,8 @@ public class create_team extends HttpServlet {
                     if (teamBO.validateInput(name)){
                         if (teamBO.validateName(name)){
                             if( pathImage != null){
-                                if(teamBO.insertTeam(name, message,nameFile,user)){
-                                    response.sendRedirect(request.getContextPath()+"/pages/main.jsp");
+                                if(teamBO.insertTeam(name, message,nameFile,user.getId_User())){
+                                    response.sendRedirect(request.getContextPath()+"/main");
                                 }else{
                                     removeImage(pathImage);
                                     RequestDispatcher rs = request.getRequestDispatcher("/pages/error.jsp?message=Ocorreu um erro inesperado&cause=Tente novamente mais tarde. Se o erro persistir Contate um administrador pelo email suporte@painellegendas.com");

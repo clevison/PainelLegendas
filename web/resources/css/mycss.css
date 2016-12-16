@@ -83,6 +83,56 @@ body {
   text-transform: uppercase;
   cursor: pointer;
 }
+.portfolioDev {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+        float:left;
+        margin: auto;
+}
+
+.dev {
+  font-family: Arial;
+  display: flex;
+  flex-direction: column;
+  width: 185px;
+  height: 198px;
+  background: #fff;
+  border: 1px solid #000;
+  border-radius: 4px;
+  margin: 25px;
+}
+.dev .title {
+  font-weight: 500;
+  cursor: default;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.dev .title h1 {
+  font-size: 14px;
+  margin: 0;
+  color: #666;
+  text-transform: uppercase;
+}
+.dev .image {
+  width: 185px;
+  height: 148px;
+}
+.dev .button {
+  background: #666;
+  color: #eee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-size: 11px;
+  height: 24px;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
 .fileUpload {
     position: relative;
     overflow: hidden;

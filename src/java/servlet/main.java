@@ -24,8 +24,8 @@ import model.User;
  *
  * @author clevi
  */
-@WebServlet(name = "teams", urlPatterns = {"/teams"})
-public class teams extends HttpServlet {
+@WebServlet(name = "main", urlPatterns = {"/main"})
+public class main extends HttpServlet {
     private static final long serialVersionUID = 1L;  
 
     @Override
@@ -33,14 +33,15 @@ public class teams extends HttpServlet {
         ArrayList<Team> teamsList = new ArrayList<>();
         User user = (User)request.getSession(false).getAttribute("user");
         TeamBO teamBO = new TeamBO();
-        teamsList = teamBO.listTeam(user);
+        teamsList = teamBO.listMyTeam(user);
         if (teamsList != null) {
-            request.setAttribute("teamsList", teamsList);
-            RequestDispatcher rs = request.getRequestDispatcher("/pages/teams.jsp");
+            request.setAttribute("myTeamsList", teamsList);
+            RequestDispatcher rs = request.getRequestDispatcher("/pages/main.jsp");
             rs.forward(request, response);
         }else{
-             RequestDispatcher rs = request.getRequestDispatcher("/pages/error.jsp?message=Erro ao Listar Equipes&cause=Por favor informe ao nosso suporte pelo email suporte@painellegendas.com");
+            RequestDispatcher rs = request.getRequestDispatcher("/pages/error.jsp?message=Erro ao Listar Equipes&cause=Por favor informe ao nosso suporte pelo email suporte@painellegendas.com");
             rs.forward(request, response);
         }
+        
     }
 }

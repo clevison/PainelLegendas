@@ -31,7 +31,7 @@ public class edit_password extends HttpServlet {
                     if (userBO.validatePassword(password)) {
                         user.setPassword(userBO.generateHash(password));
                         userBO.UpdatePassword(user);
-                        response.sendRedirect(request.getContextPath()+"/pages/main.jsp");
+                        response.sendRedirect(request.getContextPath()+"/main");
                     }else{
                          response.sendRedirect(request.getContextPath()+"/pages/edit_password.jsp?message=Senha invalida !&cause=Pelo menos 4 digitos, letras maiusculas e minusculas e numeros");
                     }  

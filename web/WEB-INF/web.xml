@@ -6,6 +6,8 @@
             30
         </session-timeout>
     </session-config>
+    
+   <!-- Error Pages
     <error-page>
         <error-code>400</error-code>
         <location>/pages/error.jsp</location>
@@ -26,4 +28,5 @@
       <error-code>500</error-code>
       <location>/pages/error.jsp</location>
     </error-page>
+    End Error Pages -->
 </web-app>
