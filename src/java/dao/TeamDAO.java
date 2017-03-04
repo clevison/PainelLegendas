@@ -76,6 +76,7 @@ public class TeamDAO{
                              "FROM team INNER JOIN team_user " +
                              "ON team.id_team = team_user.id_team_user " +
                              "WHERE team_user.id_user =" + user.getId_User();
+                System.err.println(sql);
 	        try {
 	            pstm = connection.connectionMySQL().prepareStatement(sql);
 	            rs = pstm.executeQuery();
