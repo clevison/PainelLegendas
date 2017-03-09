@@ -10,13 +10,14 @@
 	
 	<title>Painel de legendas</title>
 
-	<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/images/gt_favicon.png">
-	<link rel="stylesheet" media="screen" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/font-awesome.min.css">
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap-theme.css" media="screen" >
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main.css">
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/mycss.css">
+	<!--<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/images/gt_favicon.png"></link>
+	<link rel="stylesheet" media="screen" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700"></link>
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css"></link>
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/font-awesome.min.css"></link>
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap-theme.css" media="screen"></link>
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main.css"></link>
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/mycss.css"></link>
+        -->
 </head>
 
 <body class="home" id="container">

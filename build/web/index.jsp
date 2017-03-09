@@ -35,7 +35,7 @@
 				<p>
 					<a class="btn btn-action btn-lg" href="${pageContext.request.contextPath}/pages/login.jsp">ENTRAR</a>
 					&nbsp;&nbsp;&nbsp;
-					<a class="btn btn-action btn-lg" href="${pageContext.request.contextPath}/pages/register.jsp">CRIAR CONTA</a>
+					<a class="btn btn-action btn-lg" href="${pageContext.request.contextPath}/pages/register.xhtml">CRIAR CONTA</a>
 				</p>
 			</div>
                     </div>

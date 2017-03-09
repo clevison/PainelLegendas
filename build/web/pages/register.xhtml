@@ -1,9 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="utf-8">
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+       <meta charset="utf-8">
 	<meta name="viewport"    content="width=device-width, initial-scale=1.0">
 	<meta name="description" content="">
 	<meta name="author"      content="Sergey Pozhilov (GetTemplate.com)">
@@ -17,28 +17,42 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap-theme.css" media="screen" >
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/mycss.css">
-</head>
+    </h:head>
+    <h:body class="home" id="container">
 
-<body class="home" id="container">
-
+        <%
+            String title = request.getParameter("message");
+            if(title == null){
+                title = "Cadastro";
+            }
+            String subTitle = request.getParameter("cause");
+            if(subTitle == null){
+                subTitle = "";
+            }
+        %>
 	<!-- Fixed navbar -->
-	<jsp:include page="/pages/fixed_navbar.jsp"/>
+	<!--<jsp:include page="fixed_navbar.jsp"/>-->
 	<!-- /.navbar -->
 
 	<!-- Header -->
 	<header id="head">
 		<div class="container">
-			<div class="row">
-				<h1 class="lead">SIMPLES, PRÁTICO E CONFIÁVEL</h1>
-				<p class="tagline">Cadastre-se e tenha acesso às maiores equipes de tradução do país. <br />
-				Junte-se a elas e venha aprender inglês, português e vários outros idiomas, além de fazer novas amizades e claro, ajudar as pessoas.</p>
-				<p>
-					<a class="btn btn-action btn-lg" href="${pageContext.request.contextPath}/pages/login.jsp">ENTRAR</a>
-					&nbsp;&nbsp;&nbsp;
-					<a class="btn btn-action btn-lg" href="${pageContext.request.contextPath}/pages/register.xhtml">CRIAR CONTA</a>
-				</p>
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title"><%= title %></h4>
+                                        <p><%= subTitle %></p>
+				</div>
+				<div class="modal-body">
+					<form method="POST" action="../register">
+						<p><input type="text" name="nick" required class="myInput" placeholder="Nome de usuÃ¡rio"></p>
+						<p><input type="email" name="email" required class="myInput" placeholder="E-mail"></p>
+						<p><input type="password" required class="myInput" id="primeiraSenha" placeholder="Senha"></p>
+						<p><input type="password" name="password" required class="myInput" placeholder="Confirme sua senha" oninput="validarSenha(this)"></p>
+						<br />
+						<p><input type="submit" class="btn btn-success" id="submitButton" value="Cadastrar-se"></p>
+					</form>
+				</div>
 			</div>
-                    </div>
 		</div>
 	</header>
 	<!-- /Header -->
@@ -48,5 +62,6 @@
 	<script src="${pageContext.request.contextPath}/resources/js/headroom.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/jQuery.headroom.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/template.js"></script>
-</body>
+    </h:body>
 </html>
+
