@@ -2,7 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
     <h:head>
         <meta charset="utf-8"></meta>
         <meta name="viewport"    content="width=device-width, initial-scale=1.0"></meta>
@@ -20,31 +20,47 @@
         <h:outputStylesheet library="css" name="bootstrap-theme.css" ></h:outputStylesheet>
         <h:outputStylesheet library="css" name="main.css"></h:outputStylesheet>
         <h:outputStylesheet library="css" name="mycss.css"></h:outputStylesheet>
-        
     </h:head>
     <h:body class="home" id="container">
-
+<!--        <% 
+            String title = request.getParameter("message");
+            if(title == null){
+                title = "Login";
+            }
+            String subTitle = request.getParameter("cause");
+            if(subTitle == null){
+                subTitle = "";
+            }
+	%>-->
+	
 	<!-- Fixed navbar -->
-	<!--<ui:include page="/pages/fixed_navbar.jsp"/>-->
+	<!--<jsp:include page="fixed_navbar.jsp"/>-->
 	<!-- /.navbar -->
 
 	<!-- Header -->
-	<div id="head">
-            <div class="container">
-                <div class="row">
-                    <h1 class="lead">SIMPLES, PRÁTICO E CONFIÁVEL</h1>
-                    <p class="tagline">Cadastre-se e tenha acesso às maiores equipes de tradução do país. <br />
-                    Junte-se a elas e venha aprender inglês, português e vários outros idiomas, além de fazer novas amizades e claro, ajudar as pessoas.</p>
-                    <p>
-                        <h:link class="btn btn-action btn-lg" value="Entrar" outcome="pages/login.xhtml"/>
-                            &nbsp;&nbsp;&nbsp;
-                        <h:link class="btn btn-action btn-lg" value="Criar Conta" outcome="pages/register.xhtml"/>
-                    </p>
-                </div>
-            </div>
-        </div>
+	<header id="head">
+		<div class="container">
+			<div class="modal-content">
+				<div class="modal-header">
+					<!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+					<h4 class="modal-title">  </h4>
+<!--					<%="<h4 class='modal-title'>" + title + "</h4>"%>
+                                        <p> <%= subTitle %> </p>-->
+				</div>
+				<div class="modal-body">
+					<h:form>
+                                            <p><h:inputText value="#{UserBean.nick}" a:placeholder="Login" required="true" class="myInput"/></p>
+						<!--<p><input type="password" name="password" required class="myInput" placeholder="Senha"></p>-->
+                                            <p><h:inputText value="#{UserBean.pass}" a:placeholder="Senha" required="true" class="myInput"/></p>
+                                            <br/>
+						<!--<p><input type="submit" class="btn btn-success" value="Entrar"></p>-->
+                                                <h:commandButton value="Logar" class="btn btn-success" action="#{UserBean.Login}"></h:commandButton>
+					</h:form>
+				</div>
+			</div>
+		</div>
+	</header>
 	<!-- /Header -->
-        
         <h:outputScript library="js" name="jquery.min.js"></h:outputScript>
         <h:outputScript library="js" name="bootstrap.min.js"></h:outputScript>
         <h:outputScript library="js" name="headroom.min.js"></h:outputScript>
