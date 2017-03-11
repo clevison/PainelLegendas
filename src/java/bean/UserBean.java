@@ -6,13 +6,14 @@
 package bean;
 
 import bo.UserBO;
-import javax.annotation.ManagedBean;
-import javax.enterprise.context.SessionScoped;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 import model.User;
 import java.io.Serializable;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 
 @ManagedBean
 @SessionScoped
@@ -42,22 +43,21 @@ public class UserBean implements Serializable{
         this.pass = pass;
     }
     //validate login
-	public String Login() {
+	public String login() {
 		UserBO userBO  = new UserBO();
                 User user = new User();
                 user =  userBO.login(nick, pass);
-                System.err.println(user.getNickname());
 		if (user != null) {
 			HttpSession session = SessionUtils.getSession();
 			session.setAttribute("loggedUser", user);
-			return "Logged";
+			return "main"+"?faces-redirect=true";
 		} else {
 			FacesContext.getCurrentInstance().addMessage(
 					null,
 					new FacesMessage(FacesMessage.SEVERITY_WARN,
-							"Incorrect Username or Passowrd",
-							"Please enter correct username and Password"));
-			return "NotLogged";
+							"Nickname ou senha incorretos",
+                                                "Por favor insira um usário e senha válidos"));
+			return "login";
 		}
         } 
         //logout event, invalidate session

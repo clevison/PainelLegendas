@@ -22,17 +22,6 @@
         <h:outputStylesheet library="css" name="mycss.css"></h:outputStylesheet>
     </h:head>
     <h:body class="home" id="container">
-<!--        <% 
-            String title = request.getParameter("message");
-            if(title == null){
-                title = "Login";
-            }
-            String subTitle = request.getParameter("cause");
-            if(subTitle == null){
-                subTitle = "";
-            }
-	%>-->
-	
 	<!-- Fixed navbar -->
 	<!--<jsp:include page="fixed_navbar.jsp"/>-->
 	<!-- /.navbar -->
@@ -43,18 +32,16 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
-					<h4 class="modal-title">  </h4>
-<!--					<%="<h4 class='modal-title'>" + title + "</h4>"%>
-                                        <p> <%= subTitle %> </p>-->
+					<h4 class='modal-title'>Login</h4>
 				</div>
 				<div class="modal-body">
 					<h:form>
-                                            <p><h:inputText value="#{UserBean.nick}" a:placeholder="Login" required="true" class="myInput"/></p>
+                                            <p><h:inputText value="#{userBean.nick}" a:placeholder="Login" required="true" class="myInput"/></p>
 						<!--<p><input type="password" name="password" required class="myInput" placeholder="Senha"></p>-->
-                                            <p><h:inputText value="#{UserBean.pass}" a:placeholder="Senha" required="true" class="myInput"/></p>
+                                                <p><h:inputSecret value="#{userBean.pass}" a:placeholder="Senha" required="true" class="myInput"/></p>
                                             <br/>
 						<!--<p><input type="submit" class="btn btn-success" value="Entrar"></p>-->
-                                                <h:commandButton value="Logar" class="btn btn-success" action="#{UserBean.Login}"></h:commandButton>
+                                                <h:commandButton value="Logar" class="btn btn-success" action="#{userBean.login}"></h:commandButton>
 					</h:form>
 				</div>
 			</div>
