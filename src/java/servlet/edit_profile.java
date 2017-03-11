@@ -32,10 +32,10 @@ public class edit_profile extends HttpServlet {
                     newUser.setPermission(user.getPermission());
                     newUser.setId_User(user.getId_User());
                     
-                    System.out.println(userBO.EqualData(nick,"nickname", newUser.getId_User()));
+                    System.out.println(userBO.equalData(nick,"nickname", newUser.getId_User()));
                     
-                    if (userBO.EqualData(nick, "nickname", newUser.getId_User())) {
-                        userBO.UpdateNick(newUser);
+                    if (userBO.equalData(nick, "nickname", newUser.getId_User())) {
+                        userBO.updateNick(newUser);
                        
                     }else{
                         newUser.setNickname(user.getNickname());
@@ -44,8 +44,8 @@ public class edit_profile extends HttpServlet {
                         return;
                     }
                     
-                    if (userBO.EqualData(email,"email",newUser.getId_User())) {
-                        userBO.UpdateEmail(newUser);
+                    if (userBO.equalData(email,"email",newUser.getId_User())) {
+                        userBO.updateEmail(newUser);
                     }else{
                         newUser.setNickname(user.getNickname());
                         newUser.setEmail(user.getEmail());

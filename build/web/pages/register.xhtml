@@ -1,37 +1,31 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
     <h:head>
-       <meta charset="utf-8">
-	<meta name="viewport"    content="width=device-width, initial-scale=1.0">
-	<meta name="description" content="">
-	<meta name="author"      content="Sergey Pozhilov (GetTemplate.com)">
+        <meta charset="utf-8"></meta>
+        <meta name="viewport"    content="width=device-width, initial-scale=1.0"></meta>
+        <meta name="description" content=""></meta>
+        <meta name="author"      content="Sergey Pozhilov (GetTemplate.com)"></meta>
 	
 	<title>Painel de legendas</title>
 
-	<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/images/gt_favicon.png">
-	<link rel="stylesheet" media="screen" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/font-awesome.min.css">
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap-theme.css" media="screen" >
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main.css">
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/mycss.css">
+	<!--
+        <link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/images/gt_favicon.png"></link>
+	<link rel="stylesheet" media="screen" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700"></link>
+        -->
+        <h:outputStylesheet library="css" name="bootstrap.min.css"></h:outputStylesheet>
+        <h:outputStylesheet library="css" name="font-awesome.min.css"></h:outputStylesheet>
+        <h:outputStylesheet library="css" name="bootstrap-theme.css" ></h:outputStylesheet>
+        <h:outputStylesheet library="css" name="main.css"></h:outputStylesheet>
+        <h:outputStylesheet library="css" name="mycss.css"></h:outputStylesheet>
     </h:head>
     <h:body class="home" id="container">
 
-        <%
-            String title = request.getParameter("message");
-            if(title == null){
-                title = "Cadastro";
-            }
-            String subTitle = request.getParameter("cause");
-            if(subTitle == null){
-                subTitle = "";
-            }
-        %>
 	<!-- Fixed navbar -->
-	<!--<jsp:include page="fixed_navbar.jsp"/>-->
+	<ui:include src="/pages/fixed_navbar.xhtml"/>
 	<!-- /.navbar -->
 
 	<!-- Header -->
@@ -39,29 +33,28 @@
 		<div class="container">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h4 class="modal-title"><%= title %></h4>
-                                        <p><%= subTitle %></p>
+					<h4 class="modal-title">Registre-se</h4>
 				</div>
 				<div class="modal-body">
-					<form method="POST" action="../register">
-						<p><input type="text" name="nick" required class="myInput" placeholder="Nome de usuário"></p>
-						<p><input type="email" name="email" required class="myInput" placeholder="E-mail"></p>
-						<p><input type="password" required class="myInput" id="primeiraSenha" placeholder="Senha"></p>
-						<p><input type="password" name="password" required class="myInput" placeholder="Confirme sua senha" oninput="validarSenha(this)"></p>
-						<br />
-						<p><input type="submit" class="btn btn-success" id="submitButton" value="Cadastrar-se"></p>
-					</form>
+                                    <h:form>
+                                        <p><h:inputText value="#{registerBean.nick}" a:placeholder="Login" required="true" class="myInput" requiredMessage="nick é obrigatório"/></p>
+                                        <p><h:inputText value="#{registerBean.email}" a:type="email" a:placeholder="Email" required="true" class="myInput" requiredMessage="Email é obrigatório"/></p>
+                                        <p><h:inputSecret value="#{registerBean.pass}" a:placeholder="Senha" required="true" class="myInput" requiredMessage="Senha é obrigatória" /></p>
+                                        <p><h:inputSecret value="#{registerBean.confirmPass}" a:placeholder="Confirme sua senha" required="true" class="myInput" requiredMessage="Confirma senha é obrigatório"/></p>
+                                        <br/>
+                                        <h:commandButton value="Cadastrar-se" class="btn btn-success" action="#{registerBean.register}"></h:commandButton>
+                                    </h:form>
 				</div>
 			</div>
 		</div>
 	</header>
 	<!-- /Header -->
 
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/headroom.min.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/jQuery.headroom.min.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/template.js"></script>
+        <h:outputScript library="js" name="jquery.min.js"></h:outputScript>
+        <h:outputScript library="js" name="bootstrap.min.js"></h:outputScript>
+        <h:outputScript library="js" name="headroom.min.js"></h:outputScript>
+        <h:outputScript library="js" name="jQuery.headroom.min.js"></h:outputScript>
+        <h:outputScript library="js" name="template.js"></h:outputScript>
     </h:body>
 </html>
 

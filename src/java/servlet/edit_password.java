@@ -27,10 +27,10 @@ public class edit_password extends HttpServlet {
              UserBO userBO = new UserBO();
              
             if (userBO.validateInput(password, lastPassword)) {
-                 if (userBO.equalsPassword(lastPassword,Integer.toString(user.getId_User()))) {
+                 if (userBO.equalsPasswordForUser(lastPassword,Integer.toString(user.getId_User()))) {
                     if (userBO.validatePassword(password)) {
                         user.setPassword(userBO.generateHash(password));
-                        userBO.UpdatePassword(user);
+                        userBO.updatePassword(user);
                         response.sendRedirect(request.getContextPath()+"/main");
                     }else{
                          response.sendRedirect(request.getContextPath()+"/pages/edit_password.jsp?message=Senha invalida !&cause=Pelo menos 4 digitos, letras maiusculas e minusculas e numeros");
