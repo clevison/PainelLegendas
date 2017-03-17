@@ -50,5 +50,4 @@ public class ErrorBean implements Serializable{
         return (String)FacesContext.getCurrentInstance().getExternalContext().
         getRequestMap().get("javax.servlet.error.servlet_name");
     }
-
 }
