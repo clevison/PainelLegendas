@@ -21,8 +21,18 @@
     <welcome-file-list>
         <welcome-file>faces/index.xhtml</welcome-file>
     </welcome-file-list>
+    
+    <filter>
+        <filter-name>FilterLogin</filter-name>
+       <filter-class>filter.FilterLogin</filter-class>     
+    </filter>
+   
+    <filter-mapping>
+        <filter-name>FilterLogin</filter-name>
+        <url-pattern>/</url-pattern>
+    </filter-mapping>
      
-    <error-page>
+    <!--<error-page>
         <error-code>400</error-code>
         <location>/faces/pages/error.xhtml</location>
     </error-page>
@@ -45,6 +55,6 @@
     <error-page>
         <error-code>500</error-code>
         <location>/faces/pages/error.xhtml</location>
-    </error-page>
+    </error-page>-->
      
 </web-app>
