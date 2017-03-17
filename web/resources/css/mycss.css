@@ -5,6 +5,16 @@ body {
 	text-align: center;
 }
 
+.sair {
+    text-decoration: none ;
+}
+
+.sair:hover {
+    color:white;
+    text-decoration:none;
+    cursor:pointer;
+}
+
 #main {
 	padding-top: 100px;
 	height: 100%;

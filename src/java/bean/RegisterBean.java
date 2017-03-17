@@ -98,7 +98,7 @@ public class RegisterBean implements Serializable{
                    FacesContext.getCurrentInstance().addMessage(
                                         null,
                                         new FacesMessage(FacesMessage.SEVERITY_WARN,
-                                                        "Senha inválida, Pelo menos 4 digitos com Letras maiúsculas, minúsculas e números",""));
+                                            "Senha inválida! Pelo menos 4 dígitos com letras maiúsculas, minúsculas e números",""));
                     return "register";
                 }
             }else{
