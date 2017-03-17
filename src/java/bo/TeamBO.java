@@ -29,12 +29,11 @@ import org.apache.commons.io.FilenameUtils;
  */
 public class TeamBO{
     //Crud AREA
-    public boolean insertTeam(String name, String message,  String photo, int user){       
+    public boolean insertTeam(String name, String photo, int user){       
         
         try {
            Team team = new Team();
            team.setName(name);
-           team.setMessage(message);
            team.setPhoto(photo);
            team.setAdmim(user);
            
@@ -73,59 +72,10 @@ public class TeamBO{
     //END Validate AREA
     
     //Others AREA
-    public Map uploadImage(HttpServletRequest request,String Parentpath){
-            
-            File path = new File(Parentpath);
-            FileItemFactory itemfactory = new DiskFileItemFactory(); 
-            ServletFileUpload upload = new ServletFileUpload(itemfactory);
-            Map<String, String> map = new HashMap<>();
-            try{
-                    List<FileItem>  items = upload.parseRequest(request);
-                    String pathImage = path.getParentFile().getParentFile()+ "\\web\\upload\\images_teams";
-                   
-                    for(FileItem item:items){
-                        
-                    if (!item.isFormField() && !"".equals(item.getName())){
-                        if(validatePhoto(item.getName())){
-                            File uploadDir = new File(pathImage);
-                            File file = File.createTempFile("img",".png",uploadDir);
-                            map.put("path",file.getAbsoluteFile().toString());
-                            map.put("nameFile",file.getName());
-                            item.write(file);
-                        }else{
-                            map = null;
-                            return map;
-                        }
-                    }
-                    
-                    String fieldname = item.getFieldName();
-                    String fieldvalue = item.getString();
-                    switch (fieldname) {
-                        case "name":
-                            map.put(fieldname,fieldvalue);
-                            break;
-                        case "message":
-                           map.put(fieldname,fieldvalue);
-                            break;
-                    }
-               }
-                     
-               return map; 
-            }
-            catch(FileUploadException e){
-                 System.out.println("Error: " + e.getMessage());
-                 return null;
-            }
-            catch(Exception ex){
-                 System.out.println("Error: " + ex.getMessage() + " csaca :" + ex.getCause());
-                 return null;
-            }
-    }
-    
-    public ArrayList<Team> listTeam(User user){
+    public ArrayList<Team> listTeam(){
         TeamDAO teamDAO =  new TeamDAO();
          try {
-              return teamDAO.listTeams(user);
+              return teamDAO.listTeams();
          } catch (SQLException e) {
              System.out.println(e.getMessage());
              return null;

@@ -1,8 +1,18 @@
 body {
 	height: 100%;
-	background-image: url("../images/mosaico1.jpg");
+	background-image: url("#{resource['images/mosaico1.jpg']}");
 	background-size: cover;
 	text-align: center;
+}
+
+.sair {
+    text-decoration: none ;
+}
+
+.sair:hover {
+    color:white;
+    text-decoration:none;
+    cursor:pointer;
 }
 
 #main {

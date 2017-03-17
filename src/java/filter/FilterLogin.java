@@ -6,6 +6,7 @@
 
 package filter;
 
+import bean.SessionUtils;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
@@ -20,12 +21,13 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import model.User;
 
 /**
  *
  * @author clevi
  */
-@WebFilter("/pages/*")
+@WebFilter("/faces/pages/*")
 public class FilterLogin implements Filter {
     
     private static final boolean debug = true;
@@ -45,16 +47,26 @@ public class FilterLogin implements Filter {
             FilterChain chain)
             throws IOException, ServletException {
         
-        HttpServletRequest httpServletRequest = (HttpServletRequest) request;
+        HttpServletRequest req = (HttpServletRequest) request;
 		
-        String url = httpServletRequest.getRequestURI();
+        String url = req.getRequestURI();
 
-        HttpSession sessao = httpServletRequest.getSession();
-
-        if (sessao.getAttribute("user") != null || url.lastIndexOf("login.jsp")>-1 || url.lastIndexOf("register.jsp")>-1){
-               chain.doFilter(request, response); 
-        }else{
-             ((HttpServletResponse) response).sendRedirect(httpServletRequest.getContextPath()+"/pages/login.jsp");
+        HttpSession sessao = req.getSession();
+        
+        if (req.getRequestURI().equals("/PainelLegendas/faces/pages/login.xhtml") || req.getRequestURI().equals("/PainelLegendas/faces/pages/register.xhtml")) {
+            if (sessao.getAttribute("loggedUser") != null) {
+                HttpServletResponse res = (HttpServletResponse) response;
+                res.sendRedirect(req.getContextPath() + "/faces/pages/main.xhtml");
+            } else {
+                chain.doFilter(request, response); 
+            }
+        } else {
+            if (sessao.getAttribute("loggedUser") != null) {
+                chain.doFilter(request, response);
+            } else {
+                HttpServletResponse res = (HttpServletResponse) response;
+                res.sendRedirect(req.getContextPath() + "/faces/pages/login.xhtml");
+            }
         }
     }
 }

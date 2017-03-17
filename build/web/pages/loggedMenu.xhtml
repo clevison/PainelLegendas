@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <li class='active'><h:link value="Minhas Equipes" outcome="/faces/pages/main.xhtml"></h:link></li>
+    <!--<li class='active'><a href='"+path+"/about.jsp'>Sobre o site</a></li>-->
+    <li class='active'><h:link value="Equipes cadastradas" outcome="/faces/pages/teams.xhtml"></h:link></li>
+    <li class='active' ><h:link class="btn" value="Criar Equipe"  outcome="/faces/pages/create_team.xhtml"></h:link></li>
+    <li class="active dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Olá, <h:outputText value="#{sessionScope.loggedUser.nickname}"></h:outputText> <b class='caret'> </b></a>
+            <ul class="dropdown-menu">
+                <li class="active" ><h:link value="Editar perfil" outcome="/faces/pages/edit_profile.xhtml"></h:link></li>
+                <li class="active" ><h:link value="Editar senha" outcome="/faces/pages/edit_password.xhtml"></h:link></li>
+                <li class="sair">
+                    <h:form><h:commandLink action="#{userBean.logout}" styleClass="sair" value="Sair"></h:commandLink></h:form>
+                </li>
+            </ul>
+    </li>
+</html>
+

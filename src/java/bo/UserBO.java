@@ -35,7 +35,7 @@ public class UserBO{
         }           
     }
    //Update AREA
-    public boolean UpdateEmail(User user){       
+    public boolean updateEmail(User user){       
         try {
             UserDAO uDAO = new UserDAO();
             return uDAO.updateEmail(user);
@@ -45,7 +45,7 @@ public class UserBO{
         }           
     }
    
-    public boolean UpdateNick(User user){       
+    public boolean updateNick(User user){       
         try {
             UserDAO uDAO = new UserDAO();
             return uDAO.updateNick(user);
@@ -55,7 +55,7 @@ public class UserBO{
         }           
     }
     
-    public boolean UpdatePassword(User user){       
+    public boolean updatePassword(User user){       
         try {
             UserDAO uDAO = new UserDAO();
             return uDAO.updatePassword(user);
@@ -93,7 +93,7 @@ public class UserBO{
         }       
     };
      
-    public boolean EqualData(String newData, String field,int actualId){
+    public boolean equalData(String newData, String field,int actualId){
         UserDAO userDAO = new UserDAO();
         try{
             int returnId = userDAO.searchCurrentData(field, newData);
@@ -119,7 +119,11 @@ public class UserBO{
         return (password.length() >= 4) && upper.matcher(password).find() && lower.matcher(password).find() && numbers.matcher(password).find();
     }; 
     
-    public boolean equalsPassword(String password, String id_user){
+    public boolean equalsPassword(String password, String confirmPassword){
+        return password.equals(confirmPassword);
+    }; 
+    
+    public boolean equalsPasswordForUser(String password, String id_user){
         UserDAO uDAO = new UserDAO();
         String databasePass;
         try{
