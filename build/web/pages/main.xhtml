@@ -27,22 +27,21 @@
        <!-- Fixed navbar -->
 	<ui:include src="/pages/fixed_navbar.xhtml"/>
 	<!-- /.navbar -->
-        
         <!-- Main -->
 	<main id="main">
 		<div class="container">
 			<div class="portfolio">
-                            <c:forEach var="teams" items="${myTeamsList}">
+                            <c:forEach var="teams" items="${teamBean.listMyTeams()}">
                                  <div class="team">
                                      <div class="title">
                                              <h1>${teams.name}</h1>
                                      </div>
-                                     <img class="image" src="upload/images_teams/${teams.photo}"/>
+                                     <h:graphicImage styleClass="image" value = "../upload/images_teams/${teams.photo}" /> 
                                      <a class="button">Acessar</a>
                                  </div>
                              </c:forEach>
                         
-                            <c:if test="${empty(myTeamsList)}">
+                            <c:if test="${empty(teamBean.listMyTeams())}">
                                <h1>Você ainda não faz parte de nenhuma equipe</h1>
                             </c:if>
                         </div>

@@ -16,12 +16,11 @@ public class TeamDAO{
                 int permission =1;
 	        try {
 	            con = connection.connectionMySQL();
-                    String sql = "INSERT INTO team(name, message, photo, admim) VALUES(?,?,?,?)";
+                    String sql = "INSERT INTO team(name, photo, admim) VALUES(?,?,?)";
 	            PreparedStatement exe = con.prepareStatement(sql);
                     exe.setString(1, team.getName());
-                    exe.setString(2, team.getMessage());
-                    exe.setString(3, team.getPhoto());
-                    exe.setInt(4, team.getAdmim());
+                    exe.setString(2, team.getPhoto());
+                    exe.setInt(3, team.getAdmim());
                     exe.execute();
                     exe.close();
 	            return true; 
@@ -41,15 +40,11 @@ public class TeamDAO{
 	            throw new SQLException("Erro: " + e.getMessage());
 	        }
 	    }
-            public ArrayList<Team> listTeams(User user) throws SQLException{
+            public ArrayList<Team> listTeams() throws SQLException{
 	        ResultSet rs;
 	        PreparedStatement pstm;
-                UserDAO userDAO = null;
 	        ArrayList<Team> teams = new ArrayList<>();
-                String sql = "SELECT team.id_team, team.name, team.message, team.photo, team.admim,team_user.id_user " +
-                "FROM team LEFT JOIN team_user " +
-                "ON team.id_team = team_user.id_team_user " +
-                "WHERE team_user.id_user != "+ user.getId_User() +" OR team_user.id_user IS NULL";
+                String sql = "SELECT * from team";
 	        try {
 	            pstm = connection.connectionMySQL().prepareStatement(sql);
 	            rs = pstm.executeQuery();
@@ -57,9 +52,8 @@ public class TeamDAO{
 	            	Team team = new Team();
 	            	team.setId_Team(Integer.parseInt(rs.getString("id_team")));
 	            	team.setName(rs.getString("name"));
-                        team.setMessage(rs.getString("message"));
 	            	team.setPhoto(rs.getString("photo"));
-                        team.setAdmim(Integer.parseInt(rs.getString("id_team")));
+                        team.setAdmim(Integer.parseInt(rs.getString("admim")));
 	            	teams.add(team);
 	            }
 	            return teams;
@@ -72,11 +66,18 @@ public class TeamDAO{
 	        PreparedStatement pstm;
                 UserDAO userDAO = null;
 	        ArrayList<Team> teams = new ArrayList<>();
-                String sql = "SELECT team.id_team, team.name, team.message, team.photo, team.admim,team_user.id_user " +
-                             "FROM team INNER JOIN team_user " +
-                             "ON team.id_team = team_user.id_team_user " +
-                             "WHERE team_user.id_user =" + user.getId_User();
-                System.err.println(sql);
+                String sql = "SELECT  t.id_team, t.name, t.photo, t.admim, u.id_user, u.nickname\n" +
+                    "FROM user u, team t\n" +
+                    "Where t.admim = u.id_user\n" +
+                    "and u.id_user = " +  user.getId_User() +
+                    "\n" +
+                    "UNION\n" +
+                    "SELECT  t.id_team, t.name, t.photo, t.admim, u.id_user, u.nickname\n" +
+                    "FROM user u, team t, team_user tu\n" +
+                    "WHERE u.id_user = tu.id_user AND t.id_team = tu.id_team\n" +
+                    "\n" +
+                    "and u.id_user = " + user.getId_User();
+                System.out.println(sql);
 	        try {
 	            pstm = connection.connectionMySQL().prepareStatement(sql);
 	            rs = pstm.executeQuery();
@@ -84,7 +85,6 @@ public class TeamDAO{
 	            	Team team = new Team();
 	            	team.setId_Team(Integer.parseInt(rs.getString("id_team")));
 	            	team.setName(rs.getString("name"));
-                        team.setMessage(rs.getString("message"));
 	            	team.setPhoto(rs.getString("photo"));
                         team.setAdmim(Integer.parseInt(rs.getString("id_team")));
 	            	teams.add(team);

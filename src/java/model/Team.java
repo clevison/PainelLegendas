@@ -3,7 +3,6 @@ package model;
 public class Team {
 	private int id_Team;
         private String name;
-        private String message;
         private String photo;
         private int admim;
         
@@ -21,14 +20,6 @@ public class Team {
 
         public void setName(String name) {
             this.name = name;
-        }
-
-        public String getMessage() {
-            return message;
-        }
-
-        public void setMessage(String message) {
-            this.message = message;
         }
 
         public String getPhoto() {

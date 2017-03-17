@@ -12,24 +12,24 @@ import model.User;
 
 @ManagedBean
 @SessionScoped
-public class MenuBeam implements Serializable{
+public class MenuBean implements Serializable{
     /**
      * Creates a new instance of UserBean
      */
-    public MenuBeam(){
+    public MenuBean(){
     }
     //validate Menu
     public boolean isUserLogged(){
         User user = SessionUtils.getUser();
         return user != null;
     } 
-    public String LinkImagem() {
+    public String linkImagem() {
         User user = SessionUtils.getUser();
         String link = "";  
         if (user != null) {
-            link = "index";
+            link = "/faces/index.xhtml";
         }else{
-            link = "main";
+            link = "/faces/pages/main.xhtml";
         }
         return link;
     }

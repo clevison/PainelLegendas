@@ -31,17 +31,17 @@
 	<main id="main">
 		<div class="container">
 			<div class="portfolio">
-                            <c:forEach var="teams" items="${teamBean.listMyTeams()}">
+                            <c:forEach var="teams" items="${teamBean.listAllTeams()}">
                                  <div class="team">
                                      <div class="title">
                                              <h1>${teams.name}</h1>
                                      </div>
                                      <h:graphicImage styleClass="image" value = "../upload/images_teams/${teams.photo}" /> 
-                                     <a class="button">Acessar</a>
+                                     <a class="button">Solicitar Entrada</a>
                                  </div>
                              </c:forEach>
                         
-                            <c:if test="${empty(teamBean.listMyTeams())}">
+                            <c:if test="${empty(teamBean.listAllTeams())}">
                                <h1>Você ainda não faz parte de nenhuma equipe</h1>
                             </c:if>
                         </div>

@@ -27,27 +27,25 @@
        <!-- Fixed navbar -->
 	<ui:include src="/pages/fixed_navbar.xhtml"/>
 	<!-- /.navbar -->
-        <!-- Main -->
-	<main id="main">
-		<div class="container">
-			<div class="portfolio">
-                            <c:forEach var="teams" items="${teamBean.listMyTeams()}">
-                                 <div class="team">
-                                     <div class="title">
-                                             <h1>${teams.name}</h1>
-                                     </div>
-                                     <h:graphicImage styleClass="image" value = "../upload/images_teams/${teams.photo}" /> 
-                                     <a class="button">Acessar</a>
-                                 </div>
-                             </c:forEach>
-                        
-                            <c:if test="${empty(teamBean.listMyTeams())}">
-                               <h1>Você ainda não faz parte de nenhuma equipe</h1>
-                            </c:if>
-                        </div>
-		</div>
-	</main>
-	<!-- /Main -->
+        <!-- Header -->
+	<header id="head">
+            <div class="container">
+                <div class="row">
+                    <h1 class="lead">Um erro aconteceu </h1>
+                    <h:outputText>#{requestScope['javax.servlet.error.message']}</h:outputText>
+<!--                    <h:outputText class="tagline" value="Error Code: #{errorBean.statusCode}"></h:outputText>
+                    <br />
+                    <h:outputText class="tagline" value="Error Desscription: #{errorBean.message}"></h:outputText>
+                    <br />
+                    <h:outputText class="tagline" value="Exception Type: #{errorBean.exceptionType}"></h:outputText>
+                    <br />
+                    <h:outputText class="tagline" value="Exception Calss: #{errorBean.exception}"></h:outputText>
+                    <br />
+                    <h:outputText class="tagline" value="Request URI : #{errorBean.requestURI}"></h:outputText>-->
+                </div>
+            </div>
+	</header>
+	<!-- /Header -->
         
         <h:outputScript library="js" name="jquery.min.js"></h:outputScript>
         <h:outputScript library="js" name="bootstrap.min.js"></h:outputScript>

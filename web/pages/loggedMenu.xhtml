@@ -3,10 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html">
     <li class='active'><h:link value="Minhas Equipes" outcome="/faces/pages/main.xhtml"></h:link></li>
-    <!--<li class='active'><h:link value="Equipes cadastradas" outcome="/pages/teams.xhtml"></h:link></li>-->
     <!--<li class='active'><a href='"+path+"/about.jsp'>Sobre o site</a></li>-->
-    
-    <!--<li><a href='"+path+"/pages/create_team.jsp' class='btn' data-toggle='modal'>CRIAR EQUIPE</a></li>-->
+    <li class='active'><h:link value="Equipes cadastradas" outcome="/faces/pages/teams.xhtml"></h:link></li>
     <li class='active' ><h:link class="btn" value="Criar Equipe"  outcome="/faces/pages/create_team.xhtml"></h:link></li>
     <li class="active dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Olá, <h:outputText value="#{sessionScope.loggedUser.nickname}"></h:outputText> <b class='caret'> </b></a>
